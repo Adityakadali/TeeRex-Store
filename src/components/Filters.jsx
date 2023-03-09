@@ -1,14 +1,12 @@
-import data from "../data.json";
-
 import { filterItems } from "../utils/FilterItems";
 
-function Filters() {
+function Filters({ data }) {
   const genders = filterItems(data, "gender");
   const colors = filterItems(data, "color");
   const types = filterItems(data, "type");
   const price = filterItems(data, "price");
   return (
-    <aside className="max-w-sm px-4">
+    <aside className="max-w-xs px-4">
       {/* Genders */}
       <section>
         <h2 className="mb-2 text-lg font-semibold">Genders</h2>
