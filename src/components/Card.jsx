@@ -1,6 +1,6 @@
 function Card({ product }) {
   return (
-    <article className="rounded-sm p-4 shadow-sm transition-all delay-100 ease-in-out hover:scale-105 hover:shadow-lg">
+    <article className="h-max rounded-sm p-4 shadow-sm transition-all delay-100 ease-in-out hover:scale-105 hover:shadow-lg">
       <div className="relative">
         <img
           src={product.imageURL}

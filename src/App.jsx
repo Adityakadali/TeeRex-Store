@@ -7,14 +7,41 @@ import { useEffect } from "react";
 
 function App() {
   const [products, setProducts] = useState(data);
+  const filterArray = {
+    type: [],
+    color: ["Blue"],
+    gender: ["Men"],
+  };
+
+  //TODO:
 
   const filterItems = () => {
-    let newProducts = products.filter((product) => {
-      if (product.gender == "Women") {
-        return true;
-      }
-    });
-    setProducts(newProducts);
+    let filteredProducts = products;
+
+    if (filterArray.gender.length > 0) {
+      filteredProducts = filteredProducts.filter((product) => {
+        if (filterArray.gender.includes(product.gender)) {
+          return true;
+        }
+      });
+    }
+
+    if (filterArray.color.length > 0) {
+      filteredProducts = filteredProducts.filter((product) => {
+        if (filterArray.color.includes(product.color)) {
+          return true;
+        }
+      });
+    }
+
+    if (filterArray.type.length > 0) {
+      filteredProducts = filteredProducts.filter((product) => {
+        if (filterArray.type.includes(product.type)) {
+          return true;
+        }
+      });
+    }
+    setProducts(filteredProducts);
   };
 
   useEffect(() => filterItems(), []);
