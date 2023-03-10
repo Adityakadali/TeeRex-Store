@@ -7,11 +7,11 @@ import { useEffect } from "react";
 
 function App() {
   const [products, setProducts] = useState(data);
-  const filterArray = {
+  const [filterArray, setFilterArray] = useState({
     type: [],
-    color: ["Blue"],
-    gender: ["Men"],
-  };
+    color: [],
+    gender: [],
+  });
 
   //TODO:
 
@@ -44,13 +44,17 @@ function App() {
     setProducts(filteredProducts);
   };
 
-  useEffect(() => filterItems(), []);
+  useEffect(filterItems, [filterArray]);
 
   return (
     <div className="App">
       <Nav />
       <div className="flex gap-2">
-        <Filters data={data} />
+        <Filters
+          data={data}
+          filterArray={filterArray}
+          setFilterArray={setFilterArray}
+        />
         <Products data={products} />
       </div>
     </div>
