@@ -23,20 +23,16 @@ function App() {
       };
       setFilterArray(filteredItems);
     } else {
-      let index = filterArray[type].indexOf(id);
-      console.log(index);
-      if (index > -1) {
-        filterArray[type].splice(index, 1);
-        console.log(filterArray[type]);
-        setFilterArray(filterArray);
-      }
+      let filteredItems = {
+        ...filterArray,
+        [type]: filterArray[type].filter((item) => item != id),
+      };
     }
   };
-
   //TODO:
 
   const filterItems = () => {
-    let filteredProducts = products;
+    let filteredProducts = data;
 
     if (filterArray.gender.length > 0) {
       filteredProducts = filteredProducts.filter((product) => {
@@ -64,7 +60,10 @@ function App() {
     setProducts(filteredProducts);
   };
 
-  useEffect(filterItems, [filterArray]);
+  useEffect(() => {
+    console.log("trigger");
+    filterItems();
+  }, [filterArray]);
 
   return (
     <div className="App">
