@@ -13,6 +13,26 @@ function App() {
     gender: [],
   });
 
+  const handleChecked = (e, type) => {
+    let id = e.target.id;
+    // console.log(e.target.checked);
+    if (e.target.checked) {
+      let filteredItems = {
+        ...filterArray,
+        [type]: [...filterArray[type], id],
+      };
+      setFilterArray(filteredItems);
+    } else {
+      let index = filterArray[type].indexOf(id);
+      console.log(index);
+      if (index > -1) {
+        filterArray[type].splice(index, 1);
+        console.log(filterArray[type]);
+        setFilterArray(filterArray);
+      }
+    }
+  };
+
   //TODO:
 
   const filterItems = () => {
@@ -50,11 +70,7 @@ function App() {
     <div className="App">
       <Nav />
       <div className="flex gap-2">
-        <Filters
-          data={data}
-          filterArray={filterArray}
-          setFilterArray={setFilterArray}
-        />
+        <Filters data={data} handleChecked={handleChecked} />
         <Products data={products} />
       </div>
     </div>

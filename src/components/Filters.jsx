@@ -1,30 +1,30 @@
 import { filterItems } from "../utils/FilterItems";
 
-function Filters({ data, filterArray, setFilterArray }) {
+function Filters({ data, handleChecked }) {
   const genders = filterItems(data, "gender");
   const colors = filterItems(data, "color");
   const types = filterItems(data, "type");
   // const price = filterItems(data, "price");
 
-  const handleChecked = (e, type) => {
-    let id = e.target.id;
-    // console.log(e.target.checked);
-    if (e.target.checked) {
-      filterArray = {
-        ...filterArray,
-        [type]: [...filterArray[type], id],
-      };
-      setFilterArray(filterArray);
-    } else {
-      let index = filterArray[type].indexOf(id);
-      console.log(index);
-      if (index > -1) {
-        filterArray[type].splice(index, 1);
-        console.log(filterArray[type]);
-        setFilterArray(filterArray);
-      }
-    }
-  };
+  // const handleChecked = (e, type) => {
+  //   let id = e.target.id;
+  //   // console.log(e.target.checked);
+  //   if (e.target.checked) {
+  //     filterArray = {
+  //       ...filterArray,
+  //       [type]: [...filterArray[type], id],
+  //     };
+  //     setFilterArray(filterArray);
+  //   } else {
+  //     let index = filterArray[type].indexOf(id);
+  //     console.log(index);
+  //     if (index > -1) {
+  //       filterArray[type].splice(index, 1);
+  //       console.log(filterArray[type]);
+  //       setFilterArray(filterArray);
+  //     }
+  //   }
+  // };
   return (
     <aside className="max-w-xs px-4">
       {/* Genders */}
