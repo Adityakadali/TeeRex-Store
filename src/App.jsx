@@ -27,9 +27,9 @@ function App() {
         ...filterArray,
         [type]: filterArray[type].filter((item) => item != id),
       };
+      setFilterArray(filteredItems);
     }
   };
-  //TODO:
 
   const filterItems = () => {
     let filteredProducts = data;
