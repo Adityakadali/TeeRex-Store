@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import { storeContext } from "../context/StoreContext";
 
 function CartPage() {
-  const { cartItems } = useContext(storeContext);
+  const { cartItems, incQuantity, decQuantity } = useContext(storeContext);
 
   return (
     <div className="container mx-auto">
@@ -15,8 +15,24 @@ function CartPage() {
               <div>
                 <img className="h-28" src={item.imageURL} alt={item.name} />
               </div>
-              <h2 className="text-xl font-bold">{item.name}</h2>
-              <p>{item.quantity}</p>
+              <div>
+                <h2 className="text-xl font-bold">{item.name}</h2>
+                <p className="mt-4 flex items-center gap-2">
+                  <button
+                    onClick={() => decQuantity(item.id, item.quantity)}
+                    className="grid h-6 w-6 place-content-center bg-slate-900 px-2 py-1 font-bold text-white"
+                  >
+                    -
+                  </button>
+                  {item.quantity}
+                  <button
+                    onClick={() => incQuantity(item.id, item.quantity)}
+                    className="grid h-6 w-6 place-content-center bg-slate-900 px-2 py-1 font-bold text-white"
+                  >
+                    +
+                  </button>
+                </p>
+              </div>
             </div>
           );
         })}

@@ -34,9 +34,52 @@ function CartContext({ children }) {
     });
   };
 
+  const incQuantity = (id, currentQuantity) => {
+    let orginalQuantity = data.find((obj) => {
+      if (obj.id === id) {
+        return true;
+      }
+    }).quantity;
+    let currentCart = cartItems;
+    if (currentQuantity <= orginalQuantity) {
+      currentCart.find((obj, idx) => {
+        if (obj.id === id) {
+          console.log("pp");
+          currentCart[idx].quantity += 1;
+          currentCart = [...currentCart];
+          setCartItems(currentCart);
+          return true;
+        }
+      });
+    }
+  };
+
+  const decQuantity = (id, currentQuantity) => {
+    let currentCart = cartItems;
+    if (currentQuantity > 0) {
+      currentCart.find((obj, idx) => {
+        if (obj.id === id) {
+          console.log("pp");
+          currentCart[idx].quantity -= 1;
+          currentCart = [...currentCart];
+          setCartItems(currentCart);
+          return true;
+        }
+      });
+    }
+  };
+
   return (
     <storeContext.Provider
-      value={{ cartItems, addItem, products, setProducts, inventory }}
+      value={{
+        cartItems,
+        addItem,
+        products,
+        setProducts,
+        inventory,
+        incQuantity,
+        decQuantity,
+      }}
     >
       {children}
     </storeContext.Provider>
