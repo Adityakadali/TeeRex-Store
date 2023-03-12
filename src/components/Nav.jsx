@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import Cart from "./Cart";
 
 function Nav() {
   return (
     <header>
       <nav className="container mx-auto flex justify-between px-4 py-6">
-        <h1 className="font-mono text-2xl font-bold">TeeRex Store</h1>
+        <Link to={"/"} className="font-mono text-2xl font-bold">
+          TeeRex Store
+        </Link>
         <ul className="flex items-center gap-4">
           <li>
             <div className="itmes flex gap-2">
@@ -15,7 +18,8 @@ function Nav() {
                 placeholder="search"
                 className="rounded-sm"
               />
-              <button>
+
+              <span className="grid place-content-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -30,7 +34,7 @@ function Nav() {
                     d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                   />
                 </svg>
-              </button>
+              </span>
             </div>
           </li>
           <li>

@@ -1,15 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CartContext from "./context/cartContext";
+import CartContext from "./context/StoreContext";
+import CartPage from "./routes/CartPage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/cart",
+    element: <CartPage />,
   },
 ]);
 

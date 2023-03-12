@@ -1,7 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "../data.json";
 
-export const cart = createContext({});
+export const storeContext = createContext({});
 
 function CartContext({ children }) {
   const [cartItems, setCartItems] = useState([]);
@@ -11,30 +11,35 @@ function CartContext({ children }) {
     let itemsInCart = cartItems;
     let presentInv = inventory;
     let inCart = cartItems.find((o, i) => {
-      if (o.item === item) {
+      if (o.id === item) {
         itemsInCart[i].quantity += quantity;
+        itemsInCart = [...itemsInCart];
         setCartItems(itemsInCart);
         return true;
       }
     });
     if (!inCart) {
-      setCartItems([...cartItems, { item, quantity }]);
+      let product = inventory.find((obj) => obj.id === item);
+      setCartItems((cartItems) => [...cartItems, { ...product, quantity }]);
     }
+
     presentInv.find((o, i) => {
       if (o.id === item) {
-        presentInv[i].quantity -= quantity;
+        presentInv[i].quantity = presentInv[i].quantity - quantity;
+        presentInv = [...presentInv];
         setInventory(presentInv);
         setProducts(presentInv);
         return true;
       }
     });
   };
+
   return (
-    <cart.Provider
+    <storeContext.Provider
       value={{ cartItems, addItem, products, setProducts, inventory }}
     >
       {children}
-    </cart.Provider>
+    </storeContext.Provider>
   );
 }
 

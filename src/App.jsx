@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import Filters from "./components/Filters";
 import Nav from "./components/Nav";
 import Products from "./components/Products";
-import { cart } from "./context/cartContext";
+import { storeContext } from "./context/StoreContext";
 
 function App() {
-  const { products, setProducts, inventory } = useContext(cart);
+  const { products, setProducts, inventory, cartItems } =
+    useContext(storeContext);
   const [filterArray, setFilterArray] = useState({
     type: [],
     color: [],
@@ -61,7 +62,7 @@ function App() {
 
   useEffect(() => {
     filterItems();
-  }, [filterArray]);
+  }, [filterArray, cartItems]);
 
   return (
     <div className="App">
