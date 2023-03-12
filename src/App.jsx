@@ -1,12 +1,11 @@
-import data from "./data.json";
-import Nav from "./components/Nav";
+import { useContext, useEffect, useState } from "react";
 import Filters from "./components/Filters";
+import Nav from "./components/Nav";
 import Products from "./components/Products";
-import { useState } from "react";
-import { useEffect } from "react";
+import { cart } from "./context/cartContext";
 
 function App() {
-  const [products, setProducts] = useState(data);
+  const { products, setProducts, inventory } = useContext(cart);
   const [filterArray, setFilterArray] = useState({
     type: [],
     color: [],
@@ -25,14 +24,14 @@ function App() {
     } else {
       let filteredItems = {
         ...filterArray,
-        [type]: filterArray[type].filter((item) => item != id),
+        [type]: filterArray[type].filter((item) => item !== id),
       };
       setFilterArray(filteredItems);
     }
   };
 
   const filterItems = () => {
-    let filteredProducts = data;
+    let filteredProducts = inventory;
 
     if (filterArray.gender.length > 0) {
       filteredProducts = filteredProducts.filter((product) => {
@@ -61,7 +60,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("trigger");
     filterItems();
   }, [filterArray]);
 
@@ -69,7 +67,7 @@ function App() {
     <div className="App">
       <Nav />
       <div className="flex gap-2">
-        <Filters data={data} handleChecked={handleChecked} />
+        <Filters data={inventory} handleChecked={handleChecked} />
         <Products data={products} />
       </div>
     </div>
